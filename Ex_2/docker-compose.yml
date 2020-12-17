@@ -1,0 +1,48 @@
+version: '3'
+services:
+  # server:
+  #   image: ddhhz/nyancat-server
+  #   container_name: server
+  #   networks:
+  #     frontend:
+  #       ipv4_address: ${ip_server}
+  server:
+    image: server
+    container_name: server
+    build:
+      context: ./services/server
+    networks:
+      frontend:
+        ipv4_address: ${ip_server}
+       
+  client:
+    image: client
+    container_name: client 
+    build:
+      context: ./services/client
+    depends_on:
+      - server
+    networks:
+      frontend:
+        ipv4_address: ${ip_client}
+
+  sniffer:
+    image: sniffer
+    container_name: sniffer
+    build:
+      context: ./services/sniffer
+    depends_on:
+      - server
+    networks:
+      frontend:
+        ipv4_address: ${ip_sniffer}
+
+
+
+networks:
+  frontend:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16
+        
