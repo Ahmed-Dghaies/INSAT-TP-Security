@@ -6,4 +6,5 @@ All the exercices are made and tested using `docker-compose` configuration. That
 ### Exercices
 1. [Cracking](./Ex_1)
 2. [Sniffing](./Ex_2)
+3. [Spoofing](./Ex_3)
 
